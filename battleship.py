@@ -17,6 +17,9 @@ def buildBoard():
             print(data["board"][row][column], end = " ")
         print()
     
+def reDrawAll():
+    for item in App().spritelist[:]:
+        item.destroy()
 
 if __name__ == "__main__":
     
