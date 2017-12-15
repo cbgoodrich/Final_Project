@@ -21,16 +21,24 @@ def reDrawAll():
     for item in App().spritelist[:]:
         item.destroy()
 
+def mouseClick(event):
+    var = 0
+
 if __name__ == "__main__":
     
     data = {}
-    board = [["a", "b", "c"],["d", "e", "f"],["g", "h", "i"]]
 
-    buildBoard()
-
-    
     white = Color(0xFFFFFF, 1)
+    blue = Color(0x0000FF, 1)
     red = Color(0xFF0000, 1)
     black = Color(0x000000, 1)
+    
+    circle_empty = CircleAsset(25, LineStyle(1,black), white)
+    circle_miss = CircleAsset(25, LineStyle(1,blue), blue)
+    circle_hit = CircleAsset(25, LineStyle(1, red), red)
+    
+    buildBoard()
+    
+    
     
     
