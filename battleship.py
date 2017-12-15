@@ -9,7 +9,7 @@ from random import randint
 EMPTY = 0
 MISS = 1
 HIT = 2
-RADIUS = 50
+RADIUS = 40
 
 def buildBoard():
     return [[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5]
@@ -22,7 +22,7 @@ def reDrawAll():
             Sprite(circle_empty, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
 
 def mouseClick(event):
-    var = 0
+    kill = 1
 
 if __name__ == "__main__":
     
@@ -39,6 +39,9 @@ if __name__ == "__main__":
     
     data["board"] = buildBoard()
     reDrawAll()
+    Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,400))
+    Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,400))
+
     
     App().run()
     
