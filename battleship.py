@@ -9,17 +9,17 @@ from random import randint
 EMPTY = 0
 MISS = 1
 HIT = 2
+RADIUS = 50
 
 def buildBoard():
-    data["board"] = [[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5]
-    for row in range(0,5):
-        for column in range(0,5):
-            print(data["board"][row][column], end = " ")
-        print()
+    return [[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5]
     
 def reDrawAll():
     for item in App().spritelist[:]:
         item.destroy()
+    for row in range(0,5):
+        for column in range(0,5):
+            Sprite(circle_empty, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
 
 def mouseClick(event):
     var = 0
@@ -33,11 +33,16 @@ if __name__ == "__main__":
     red = Color(0xFF0000, 1)
     black = Color(0x000000, 1)
     
-    circle_empty = CircleAsset(25, LineStyle(1,black), white)
-    circle_miss = CircleAsset(25, LineStyle(1,blue), blue)
-    circle_hit = CircleAsset(25, LineStyle(1, red), red)
+    circle_empty = CircleAsset(RADIUS, LineStyle(1,black), white)
+    circle_miss = CircleAsset(RADIUS, LineStyle(1,blue), blue)
+    circle_hit = CircleAsset(RADIUS, LineStyle(1, red), red)
     
-    buildBoard()
+    data["board"] = buildBoard()
+    reDrawAll()
+    
+    App().run()
+    
+    
     
     
     
