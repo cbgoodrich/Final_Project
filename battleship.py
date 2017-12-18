@@ -27,7 +27,7 @@ def reDrawAll():
 
 
 def mouseClick(event):
-    kill = 1
+    print(event.x, event.y)
     
 def computerTurn():
     choose = False
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
     
-    App().run()
+    App().run(event)
     
     
     
