@@ -25,10 +25,9 @@ def reDrawAll():
                 Sprite(circle_empty, (RADIUS+2*row*RADIUS+500*i, RADIUS+2*column*RADIUS))
         i += 1
 
-
 def mouseClick(event):
-    print(event.x, event.y)
     
+
 def computerTurn():
     choose = False
     i = 0
@@ -38,7 +37,7 @@ def computerTurn():
             column = randint(0,4)
             if data["computerBoard"][row][column] != SHIP:
                 data["computerBoard"][row][column] = SHIP
-            i += 1
+                i += 1
         choose = True
         print(data["computerBoard"])
 
@@ -62,8 +61,8 @@ if __name__ == "__main__":
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
-    
-    App().run(event)
+    App().listenMouseEvent("click", mouseClick)
+    App().run()
     
     
     
