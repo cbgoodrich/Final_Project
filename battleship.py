@@ -39,8 +39,8 @@ if __name__ == "__main__":
     
     data["board"] = buildBoard()
     reDrawAll()
-    Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,400))
-    Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,400))
+    Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
+    Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
     
     App().run()
