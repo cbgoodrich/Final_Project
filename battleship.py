@@ -33,14 +33,14 @@ def computerTurn():
     choose = False
     i = 0
     if choose == False:
-        while i <= 3:
+        while i <= 2:
             row = randint(0,4)
             column = randint(0,4)
             if data["computerBoard"][row][column] != SHIP:
                 data["computerBoard"][row][column] = SHIP
-            else:
-                row = randint(0,4)
-                column = randint(0,4)
+            i += 1
+        choose = True
+        print(data["computerBoard"])
 
 if __name__ == "__main__":
     
@@ -58,6 +58,7 @@ if __name__ == "__main__":
     data["playerBoard"] = buildBoard()
     data["computerBoard"] = buildBoard()
     reDrawAll()
+    computerTurn()
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
