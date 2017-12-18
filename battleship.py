@@ -9,6 +9,7 @@ from random import randint
 EMPTY = 0
 MISS = 1
 HIT = 2
+SHIP = 3
 RADIUS = 40
 
 def buildBoard():
@@ -17,12 +18,29 @@ def buildBoard():
 def reDrawAll():
     for item in App().spritelist[:]:
         item.destroy()
-    for row in range(0,5):
-        for column in range(0,5):
-            Sprite(circle_empty, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+    i = 0
+    while i <= 1:
+        for row in range(0,5):
+            for column in range(0,5):
+                Sprite(circle_empty, (RADIUS+2*row*RADIUS+500*i, RADIUS+2*column*RADIUS))
+        i += 1
+
 
 def mouseClick(event):
     kill = 1
+    
+def computerTurn():
+    choose = False
+    i = 0
+    if choose == False:
+        while i <= 3:
+            row = randint(0,4)
+            column = randint(0,4)
+            if data["computerBoard"][row][column] != SHIP:
+                data["computerBoard"][row][column] = SHIP
+            else:
+                row = randint(0,4)
+                column = randint(0,4)
 
 if __name__ == "__main__":
     
@@ -37,7 +55,8 @@ if __name__ == "__main__":
     circle_miss = CircleAsset(RADIUS, LineStyle(1,blue), blue)
     circle_hit = CircleAsset(RADIUS, LineStyle(1, red), red)
     
-    data["board"] = buildBoard()
+    data["playerBoard"] = buildBoard()
+    data["computerBoard"] = buildBoard()
     reDrawAll()
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
