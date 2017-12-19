@@ -20,9 +20,24 @@ def reDrawAll():
         item.destroy()
     for row in range(0,5):
         for column in range(0,5):
-            if data["playerBoard"][row][column] == HIT:
-                Sprite(circle_hit), (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
-    
+            if data["playerBoard"][row][column] == EMPTY:
+                Sprite(circle_empty, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+            elif data["playerBoard"][row][column] == MISS:
+                Sprite(circle_miss, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+            elif data["playerBoard"][row][column] == HIT:
+                Sprite(circle_hit, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+            elif data["playerBoard"][row][column] == SHIP:
+                Sprite(circle_ship, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+    for row in range(0,5):
+        for column in range(0,5):
+            if data["computerBoard"][row][column] == MISS:
+                Sprite(circle_miss, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+            elif data["computerBoard"][row][column] == HIT:
+                Sprite(circle_hit, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+            elif data["computerBoard"][row][column] == SHIP:
+                Sprite(circle_ship, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+            elif data["computerBoard"][row][column] == EMPTY:
+                Sprite(circle_empty, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
     
 
 def mouseClick(event):
@@ -53,14 +68,16 @@ if __name__ == "__main__":
     black = Color(0x000000, 1)
     
     circle_empty = CircleAsset(RADIUS, LineStyle(1,black), white)
-    circle_miss = CircleAsset(RADIUS, LineStyle(1,blue), blue)
-    circle_hit = CircleAsset(RADIUS, LineStyle(1, red), red)
-    circle_ship = CircleAsset(RADIUS, LineStyle(1, gray), gray)
+    circle_miss = CircleAsset(RADIUS, LineStyle(1,black), blue)
+    circle_hit = CircleAsset(RADIUS, LineStyle(1,black), red)
+    circle_ship = CircleAsset(RADIUS, LineStyle(1,black), gray)
     
     data["playerBoard"] = buildBoard()
     data["computerBoard"] = buildBoard()
-    reDrawAll()
+    
     pickComputerShips()
+    reDrawAll()
+    
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
