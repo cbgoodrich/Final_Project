@@ -41,13 +41,12 @@ def reDrawAll():
     
 
 def mouseClick(event):
-    ship_count = 0
-    while ship_count < 3:
+    while data["shipCount"] < 3:
         col_click = event.x//80
         row_click = event.y//80
-        data["userBoard"][row_click][col_click] = SHIP
+        data["playerBoard"][row_click][col_click] = SHIP
         Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
-        ship_count += 1
+        data["shipCount"] += 1
         
 
 def pickComputerShips():
@@ -67,6 +66,8 @@ def pickComputerShips():
 if __name__ == "__main__":
     
     data = {}
+    data["shipCount"] = 0
+    
     
     gray = Color(0xD3D3D3, 1)
     white = Color(0xFFFFFF, 1)
