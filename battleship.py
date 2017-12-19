@@ -21,23 +21,23 @@ def reDrawAll():
     for row in range(0,5):
         for column in range(0,5):
             if data["playerBoard"][row][column] == EMPTY:
-                Sprite(circle_empty, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+                Sprite(circle_empty, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == MISS:
-                Sprite(circle_miss, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+                Sprite(circle_miss, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == HIT:
-                Sprite(circle_hit, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+                Sprite(circle_hit, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == SHIP:
-                Sprite(circle_ship, (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+                Sprite(circle_ship, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
     for row in range(0,5):
         for column in range(0,5):
             if data["computerBoard"][row][column] == MISS:
-                Sprite(circle_miss, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+                Sprite(circle_miss, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == HIT:
-                Sprite(circle_hit, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+                Sprite(circle_hit, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == SHIP:
-                Sprite(circle_ship, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+                Sprite(circle_ship, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == EMPTY:
-                Sprite(circle_empty, (RADIUS+2*row*RADIUS+500, RADIUS+2*column*RADIUS))
+                Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
     
 
 def mouseClick(event):
@@ -47,7 +47,7 @@ def pickComputerShips():
     choose = False
     i = 0
     if choose == False:
-        while i <= 2:
+        while i < 3:
             row = randint(0,4)
             column = randint(0,4)
             if data["computerBoard"][row][column] != SHIP:
