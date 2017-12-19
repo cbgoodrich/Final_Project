@@ -41,9 +41,9 @@ def reDrawAll():
     
 
 def mouseClick(event):
-    col_click = event.x//80+1
-    row_click = event.y//80+1
-    print("You clicked in row", row_click,"and in column",col_click)
+    col_click = event.x//80
+    row_click = event.y//80
+    
 
 def pickComputerShips():
     choose = False
