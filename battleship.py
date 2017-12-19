@@ -18,17 +18,17 @@ def buildBoard():
 def reDrawAll():
     for item in App().spritelist[:]:
         item.destroy()
-    i = 0
-    while i <= 1:
-        for row in range(0,5):
-            for column in range(0,5):
-                Sprite(circle_empty, (RADIUS+2*row*RADIUS+500*i, RADIUS+2*column*RADIUS))
-        i += 1
-
-def mouseClick(event):
+    for row in range(0,5):
+        for column in range(0,5):
+            if data["playerBoard"][row][column] == HIT:
+                Sprite(circle_hit), (RADIUS+2*row*RADIUS, RADIUS+2*column*RADIUS))
+    
     
 
-def computerTurn():
+def mouseClick(event):
+    var = 0
+
+def pickComputerShips():
     choose = False
     i = 0
     if choose == False:
@@ -40,11 +40,13 @@ def computerTurn():
                 i += 1
         choose = True
         print(data["computerBoard"])
-
+        
+    
 if __name__ == "__main__":
     
     data = {}
-
+    
+    gray = Color(0xD3D3D3, 1)
     white = Color(0xFFFFFF, 1)
     blue = Color(0x0000FF, 1)
     red = Color(0xFF0000, 1)
@@ -53,11 +55,12 @@ if __name__ == "__main__":
     circle_empty = CircleAsset(RADIUS, LineStyle(1,black), white)
     circle_miss = CircleAsset(RADIUS, LineStyle(1,blue), blue)
     circle_hit = CircleAsset(RADIUS, LineStyle(1, red), red)
+    circle_ship = CircleAsset(RADIUS, LineStyle(1, gray), gray)
     
     data["playerBoard"] = buildBoard()
     data["computerBoard"] = buildBoard()
     reDrawAll()
-    computerTurn()
+    pickComputerShips()
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
