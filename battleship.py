@@ -41,9 +41,14 @@ def reDrawAll():
     
 
 def mouseClick(event):
-    col_click = event.x//80
-    row_click = event.y//80
-    
+    ship_count = 0
+    while ship_count < 3:
+        col_click = event.x//80
+        row_click = event.y//80
+        data["userBoard"][row_click][col_click] = SHIP
+        Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
+        ship_count += 1
+        
 
 def pickComputerShips():
     choose = False
