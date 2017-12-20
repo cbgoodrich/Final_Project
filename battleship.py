@@ -54,22 +54,23 @@ def mouseClick(event):
                 Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
                 data["shipCount"] += 1
         else:
-            col_choose = (event.x-500)//80
-            row_choose = event.y//80
-            if data["computerBoard"][row_choose][col_choose] == EMPTY:
-                data["computerBoard"][row_choose][col_choose] = MISS
-                computer = True
-            elif data["computerBoard"][row_choose][col_choose] == SHIP:
-                data["computerBoard"][row_choose][col_choose] = HIT
-                data["playerHits"] += 1
-                computer = True
-            elif data["computerBoard"][row_choose][col_choose] == MISS:
-                computer = False
-            elif data["computerBoard"][row_choose][col_choose] == HIT:
-                computer = False
-            reDrawAll()
-            if computer == True:
-                computerTurn()
+            if event.x-500 < 0:
+                col_choose = (event.x-500)//80
+                row_choose = event.y//80
+                if data["computerBoard"][row_choose][col_choose] == EMPTY:
+                    data["computerBoard"][row_choose][col_choose] = MISS
+                    computer = True
+                elif data["computerBoard"][row_choose][col_choose] == SHIP:
+                    data["computerBoard"][row_choose][col_choose] = HIT
+                    data["playerHits"] += 1
+                    computer = True
+                elif data["computerBoard"][row_choose][col_choose] == MISS:
+                    computer = False
+                elif data["computerBoard"][row_choose][col_choose] == HIT:
+                    computer = False
+                reDrawAll()
+                if computer == True:
+                    computerTurn()
     
 
 def pickComputerShips():
