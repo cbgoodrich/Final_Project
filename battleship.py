@@ -40,27 +40,36 @@ def reDrawAll():
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
+    if data["playerHits"] == 3 or data["computerHits"] == 3:
+        data["continue"] = False
+        Sprite(TextAsset("GAME...OVER", fill = black, style = "Bold 60pt Times"),(300, 250))
 
 def mouseClick(event):
-    playerTurn = True
-    if data["shipCount"] < 3:
-        col_click = event.x//80
-        row_click = event.y//80
-        data["playerBoard"][row_click][col_click] = SHIP
-        Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
-        data["shipCount"] += 1
-    else:
-        if playerTurn == True:
+    if data["continue"] == True:
+        if data["shipCount"] < 3:
+            col_click = event.x//80
+            row_click = event.y//80
+            data["playerBoard"][row_click][col_click] = SHIP
+            Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
+            data["shipCount"] += 1
+        else:
             col_choose = (event.x-500)//80
             row_choose = event.y//80
             if data["computerBoard"][row_choose][col_choose] == EMPTY:
                 data["computerBoard"][row_choose][col_choose] = MISS
+                computer = True
             elif data["computerBoard"][row_choose][col_choose] == SHIP:
                 data["computerBoard"][row_choose][col_choose] = HIT
                 data["playerHits"] += 1
+                computer = True
+            elif data["computerBoard"][row_choose][col_choose] == MISS:
+                computer = False
+            elif data["computerBoard"][row_choose][col_choose] == HIT:
+                computer = False
             reDrawAll()
-            playerTurn == False
-        computerTurn()
+            if computer == True:
+                computerTurn()
+    
 
 def pickComputerShips():
     choose = False
@@ -95,6 +104,7 @@ def computerTurn():
 if __name__ == "__main__":
     
     data = {}
+    data["continue"] = True
     data["shipCount"] = 0
     data["computerHits"] = 0
     data["playerHits"] = 0
