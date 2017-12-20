@@ -42,6 +42,7 @@ def reDrawAll():
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
 
 def mouseClick(event):
+    playerTurn = True
     if data["shipCount"] < 3:
         col_click = event.x//80
         row_click = event.y//80
@@ -49,7 +50,18 @@ def mouseClick(event):
         Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
         data["shipCount"] += 1
     else:
-        computerTurn()
+        if playerTurn == True:
+            col_choose = (event.x-500)//80
+            row_choose = event.y//80
+            if data["computerBoard"][row_choose][col_choose] == EMPTY:
+                Sprite(circle_miss, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+            elif data["computerBoard"][row_choose][col_choose] == SHIP:
+                Sprite(circle_hit, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                data["playerHits"] += 1
+            reDrawAll()
+            playerTurn == False
+        else:
+            computerTurn()
 
 def pickComputerShips():
     choose = False
@@ -79,6 +91,7 @@ def computerTurn():
                 i = 1
         pick = True
     reDrawAll()
+    playerTurn = True
     
 if __name__ == "__main__":
     
