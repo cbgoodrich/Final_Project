@@ -81,7 +81,7 @@ def mouseClick(event):
                 if data["computerHits"] == 3: #de-bug where I would sink last ship, computer would guess, fixed
                     data["continue"] = False
                 reDrawAll() #updates the board
-                if computer == True and data["continue"] = True:
+                if computer == True and data["continue"] == True:
                     computerTurn() #tells the computer to guess
 
 #HAS THE COMPUTER PICK THREE RANDOM SHIP LOCATIONS AND AMEND THE COMPUTER'S BOARD
