@@ -12,13 +12,15 @@ HIT = 2
 SHIP = 3
 RADIUS = 40
 
+#BUILDS THE DESIRED MATRIX BOARD AND RETURNS IT TO THE MAIN FUNCTION
 def buildBoard():
     return [[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5]
-    
+
+#AFTER EACH MOVE, THIS FUNCTION REDRAWS THE GAME BOARD    
 def reDrawAll():
-    for item in App().spritelist[:]:
-        item.destroy()
-    for row in range(0,5):
+    for item in App().spritelist[:]: #loop going through all the sprites
+        item.destroy() #destroys the sprites
+    for row in range(0,5): #the double for loop is to sprite the game board
         for column in range(0,5):
             if data["playerBoard"][row][column] == EMPTY:
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
@@ -38,48 +40,55 @@ def reDrawAll():
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == EMPTY:
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+    
+    #sprites the text underneath each game board
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
-    if data["playerHits"] == 3:
-        data["continue"] = False
+    
+    if data["playerHits"] == 3: #checking to see how many times the player has hit a ship
+        data["continue"] = False #variable that makes the mouseClick function run
         Sprite(TextAsset("YOU WIN", fill = black, style = "Bold 60pt Times"),(325,150))
     elif data["computerHits"] == 3:
         data["continue"] = False
         Sprite(TextAsset("GAME OVER. YOU LOSE", fill = black, style = "Bold 60pt Times"),(325,150))
 
+#RUNS THE PROGRAM BY SEEING WHERE CLICKS OCCUR, THEN CHANGING THE GAME MATRICES BASED ON CLICKS
 def mouseClick(event):
-    if data["continue"] == True:
-        if data["shipCount"] < 3:
-            if event.x <= 2*RADIUS*5:
-                col_click = event.x//80
+    if data["continue"] == True: #seeing if it should run; if false it doesn't do anything
+        if data["shipCount"] < 3: #seeing how many ships the user selected
+            if event.x <= 2*RADIUS*5: #only doing if user clicks in the game board
+                col_click = event.x//80 #creating columns and rows based on a click
                 row_click = event.y//80
                 if data["playerBoard"][row_click][col_click] != SHIP:
-                    data["playerBoard"][row_click][col_click] = SHIP
+                    data["playerBoard"][row_click][col_click] = SHIP #adding a ship to the player board
                     Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
                     data["shipCount"] += 1
-        else:
-            col_choose = (event.x-500)//80
+        else: #only runs if the user has selected three ships
+            col_choose = (event.x-500)//80 
             row_choose = event.y//80
-            if col_choose >= 0:
+            if col_choose >= 0: #making sure the user clicks in the game board
                 if data["computerBoard"][row_choose][col_choose] == EMPTY:
                     data["computerBoard"][row_choose][col_choose] = MISS
-                    computer = True
+                    computer = True #variable that tells the computer to guess where to shoot
                 elif data["computerBoard"][row_choose][col_choose] == SHIP:
                     data["computerBoard"][row_choose][col_choose] = HIT
                     data["playerHits"] += 1
                     computer = True
                 elif data["computerBoard"][row_choose][col_choose] == MISS:
-                    computer = False
+                    computer = False #if computer = False then the computer doesn't shoot, it waits until True
                 elif data["computerBoard"][row_choose][col_choose] == HIT:
                     computer = False
-                reDrawAll()
+                if data["computerHits"] == 3: #de-bug where I would sink last ship, computer would guess, fixed
+                    computer = False
+                reDrawAll() #updates the board
                 if computer == True:
-                    computerTurn()
+                    computerTurn() #tells the computer to guess
 
+#HAS THE COMPUTER PICK THREE RANDOM SHIP LOCATIONS AND AMEND THE COMPUTER'S BOARD
 def pickComputerShips():
-    choose = False
-    i = 0
+    choose = False #variable to see if the computer has chosen all its ships
     if choose == False:
+        i = 0
         while i < 3:
             row = randint(0,4)
             column = randint(0,4)
