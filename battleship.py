@@ -35,7 +35,7 @@ def reDrawAll():
             elif data["computerBoard"][row][column] == HIT:
                 Sprite(circle_hit, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == SHIP:
-                Sprite(circle_ship, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == EMPTY:
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
     
@@ -47,7 +47,7 @@ def mouseClick(event):
         data["playerBoard"][row_click][col_click] = SHIP
         Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
         data["shipCount"] += 1
-        
+    computerTurn()
 
 def pickComputerShips():
     choose = False
@@ -60,8 +60,23 @@ def pickComputerShips():
                 data["computerBoard"][row][column] = SHIP
                 i += 1
         choose = True
-        print(data["computerBoard"])
         
+def computerTurn():
+    pick = False
+    if pick == False:
+        i = 0
+        while i == 0:
+            row_guess = randint(0,4)
+            col_guess = randint(0,4)
+            if data["playerBoard"][row][column] == SHIP:
+                data["playerBoard"][row][column] = HIT
+                i = 1
+            elif data["playerBoard"][row][column] == EMPTY:
+                data["playerBoard"][row][column] = MISS
+                i = 1
+        pick = True
+    reDrawAll()
+
     
 if __name__ == "__main__":
     
