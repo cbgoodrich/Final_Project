@@ -54,9 +54,9 @@ def mouseClick(event):
             col_choose = (event.x-500)//80
             row_choose = event.y//80
             if data["computerBoard"][row_choose][col_choose] == EMPTY:
-                Sprite(circle_miss, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                data["computerBoard"][row_choose][col_choose] = MISS
             elif data["computerBoard"][row_choose][col_choose] == SHIP:
-                Sprite(circle_hit, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                data["computerBoard"][row_choose][col_choose] = HIT
                 data["playerHits"] += 1
             reDrawAll()
             playerTurn == False
