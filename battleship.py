@@ -47,7 +47,7 @@ def reDrawAll():
 def mouseClick(event):
     if data["continue"] == True:
         if data["shipCount"] < 3:
-            if event.x > 2*RADIUS*5:
+            if event.x <= 2*RADIUS*5:
                 col_click = event.x//80
                 row_click = event.y//80
                 data["playerBoard"][row_click][col_click] = SHIP
