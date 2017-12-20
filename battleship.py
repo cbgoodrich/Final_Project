@@ -71,7 +71,6 @@ def mouseClick(event):
             reDrawAll()
             if computer == True:
                 computerTurn()
-    
 
 def pickComputerShips():
     choose = False
