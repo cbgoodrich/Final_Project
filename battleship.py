@@ -49,7 +49,6 @@ def mouseClick(event):
         Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
         data["shipCount"] += 1
     else:
-        
         computerTurn()
 
 def pickComputerShips():
