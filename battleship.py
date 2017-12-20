@@ -47,11 +47,12 @@ def reDrawAll():
 def mouseClick(event):
     if data["continue"] == True:
         if data["shipCount"] < 3:
-            col_click = event.x//80
-            row_click = event.y//80
-            data["playerBoard"][row_click][col_click] = SHIP
-            Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
-            data["shipCount"] += 1
+            if event.x > 2*RADIUS*5:
+                col_click = event.x//80
+                row_click = event.y//80
+                data["playerBoard"][row_click][col_click] = SHIP
+                Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
+                data["shipCount"] += 1
         else:
             col_choose = (event.x-500)//80
             row_choose = event.y//80
