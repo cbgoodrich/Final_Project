@@ -42,7 +42,7 @@ def reDrawAll():
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
     if data["playerHits"] == 3 or data["computerHits"] == 3:
         data["continue"] = False
-        Sprite(TextAsset("GAME...OVER", fill = black, style = "Bold 60pt Times"),(300, 250))
+        Sprite(TextAsset("GAME OVER", fill = black, style = "Bold 60pt Times"),(325,150))
 
 def mouseClick(event):
     if data["continue"] == True:
