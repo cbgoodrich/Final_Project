@@ -47,7 +47,8 @@ def mouseClick(event):
         data["playerBoard"][row_click][col_click] = SHIP
         Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
         data["shipCount"] += 1
-    computerTurn()
+    else:
+        computerTurn()
 
 def pickComputerShips():
     choose = False
@@ -68,11 +69,11 @@ def computerTurn():
         while i == 0:
             row_guess = randint(0,4)
             col_guess = randint(0,4)
-            if data["playerBoard"][row][column] == SHIP:
-                data["playerBoard"][row][column] = HIT
+            if data["playerBoard"][row_guess][col_guess] == SHIP:
+                data["playerBoard"][row_guess][col_guess] = HIT
                 i = 1
-            elif data["playerBoard"][row][column] == EMPTY:
-                data["playerBoard"][row][column] = MISS
+            elif data["playerBoard"][row_guess][col_guess] == EMPTY:
+                data["playerBoard"][row_guess][col_guess] = MISS
                 i = 1
         pick = True
     reDrawAll()
