@@ -50,9 +50,10 @@ def mouseClick(event):
             if event.x <= 2*RADIUS*5:
                 col_click = event.x//80
                 row_click = event.y//80
-                data["playerBoard"][row_click][col_click] = SHIP
-                Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
-                data["shipCount"] += 1
+                if data["playerBoard"][row_click][col_click] != SHIP:
+                    data["playerBoard"][row_click][col_click] = SHIP
+                    Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
+                    data["shipCount"] += 1
         else:
             col_choose = (event.x-500)//80
             row_choose = event.y//80
