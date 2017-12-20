@@ -40,9 +40,12 @@ def reDrawAll():
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
-    if data["playerHits"] == 3 or data["computerHits"] == 3:
+    if data["playerHits"] == 3:
         data["continue"] = False
-        Sprite(TextAsset("GAME OVER", fill = black, style = "Bold 60pt Times"),(325,150))
+        Sprite(TextAsset("YOU WIN", fill = black, style = "Bold 60pt Times"),(325,150))
+    elif data["computerHits"] == 3:
+        data["continue"] = False
+        Sprite(TextAsset("GAME OVER. YOU LOSE", fill = black, style = "Bold 60pt Times"),(325,150))
 
 def mouseClick(event):
     if data["continue"] == True:
