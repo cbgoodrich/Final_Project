@@ -57,20 +57,21 @@ def mouseClick(event):
         else:
             col_choose = (event.x-500)//80
             row_choose = event.y//80
-            if data["computerBoard"][row_choose][col_choose] == EMPTY:
-                data["computerBoard"][row_choose][col_choose] = MISS
-                computer = True
-            elif data["computerBoard"][row_choose][col_choose] == SHIP:
-                data["computerBoard"][row_choose][col_choose] = HIT
-                data["playerHits"] += 1
-                computer = True
-            elif data["computerBoard"][row_choose][col_choose] == MISS:
-                computer = False
-            elif data["computerBoard"][row_choose][col_choose] == HIT:
-                computer = False
-            reDrawAll()
-            if computer == True:
-                computerTurn()
+            if col_choose >= 0:
+                if data["computerBoard"][row_choose][col_choose] == EMPTY:
+                    data["computerBoard"][row_choose][col_choose] = MISS
+                    computer = True
+                elif data["computerBoard"][row_choose][col_choose] == SHIP:
+                    data["computerBoard"][row_choose][col_choose] = HIT
+                    data["playerHits"] += 1
+                    computer = True
+                elif data["computerBoard"][row_choose][col_choose] == MISS:
+                    computer = False
+                elif data["computerBoard"][row_choose][col_choose] == HIT:
+                    computer = False
+                reDrawAll()
+                if computer == True:
+                    computerTurn()
 
 def pickComputerShips():
     choose = False
@@ -129,9 +130,4 @@ if __name__ == "__main__":
 
     App().listenMouseEvent("click", mouseClick)
     App().run()
-    
-    
-    
-    
-    
     
