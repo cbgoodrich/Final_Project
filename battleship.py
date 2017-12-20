@@ -79,9 +79,9 @@ def mouseClick(event):
                 elif data["computerBoard"][row_choose][col_choose] == HIT:
                     computer = False
                 if data["computerHits"] == 3: #de-bug where I would sink last ship, computer would guess, fixed
-                    computer = False
+                    data["continue"] = False
                 reDrawAll() #updates the board
-                if computer == True:
+                if computer == True and data["continue"] = True:
                     computerTurn() #tells the computer to guess
 
 #HAS THE COMPUTER PICK THREE RANDOM SHIP LOCATIONS AND AMEND THE COMPUTER'S BOARD
