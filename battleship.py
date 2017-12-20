@@ -60,7 +60,7 @@ def mouseClick(event):
                 data["playerHits"] += 1
             reDrawAll()
             playerTurn == False
-        else:
+        elif playerTurn == False:
             computerTurn()
 
 def pickComputerShips():
