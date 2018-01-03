@@ -5,23 +5,24 @@
 from ggame import *
 from random import randint
 
-#CONSTANTS
+#CONSTANTS/HELPFUL VARIABLES
 EMPTY = 0
 MISS = 1
 HIT = 2
-SHIP = 3
+SIZE = 5
+SHIP = int(input("Enter the number of ships you want: "))
 RADIUS = 40
 
 #BUILDS THE DESIRED MATRIX BOARD AND RETURNS IT TO THE MAIN FUNCTION
 def buildBoard():
-    return [[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5,[EMPTY]*5]
+    return [[EMPTY]*SIZE,[EMPTY]*SIZE,[EMPTY]*SIZE,[EMPTY]*SIZE,[EMPTY]*SIZE]
 
 #AFTER EACH MOVE, THIS FUNCTION REDRAWS THE GAME BOARD    
 def reDrawAll():
     for item in App().spritelist[:]: #loop going through all the sprites
         item.destroy() #destroys the sprites
-    for row in range(0,5): #the double for loop is to sprite the game board
-        for column in range(0,5):
+    for row in range(0,SIZE): #the double for loop is to sprite the game board
+        for column in range(0,SIZE):
             if data["playerBoard"][row][column] == EMPTY:
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == MISS:
@@ -30,41 +31,41 @@ def reDrawAll():
                 Sprite(circle_hit, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == SHIP:
                 Sprite(circle_ship, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
-    for row in range(0,5):
-        for column in range(0,5):
+    for row in range(0,SIZE):
+        for column in range(0,SIZE):
             if data["computerBoard"][row][column] == MISS:
-                Sprite(circle_miss, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                Sprite(circle_miss, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == HIT:
-                Sprite(circle_hit, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                Sprite(circle_hit, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == SHIP:
-                Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                Sprite(circle_empty, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
             elif data["computerBoard"][row][column] == EMPTY:
-                Sprite(circle_empty, (RADIUS+2*column*RADIUS+500, RADIUS+2*row*RADIUS))
+                Sprite(circle_empty, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
     
     #sprites the text underneath each game board
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
     
-    if data["playerHits"] == 3: #checking to see how many times the player has hit a ship
+    if data["playerHits"] == SHIP: #checking to see how many times the player has hit a ship
         data["continue"] = False #variable that makes the mouseClick function run
         Sprite(TextAsset("YOU WIN", fill = black, style = "Bold 60pt Times"),(325,150))
-    elif data["computerHits"] == 3:
+    elif data["computerHits"] == SHIP:
         data["continue"] = False
         Sprite(TextAsset("GAME OVER. YOU LOSE", fill = black, style = "Bold 60pt Times"),(325,150))
 
 #RUNS THE PROGRAM BY SEEING WHERE CLICKS OCCUR, THEN CHANGING THE GAME MATRICES BASED ON CLICKS
 def mouseClick(event):
     if data["continue"] == True: #seeing if it should run; if false it doesn't do anything
-        if data["shipCount"] < 3: #seeing how many ships the user selected
-            if event.x <= 2*RADIUS*5: #only doing if user clicks in the game board
+        if data["shipCount"] < SHIP: #seeing how many ships the user selected
+            if event.x <= 2*RADIUS*SIZE: #only doing if user clicks in the game board
                 col_click = event.x//80 #creating columns and rows based on a click
                 row_click = event.y//80
                 if data["playerBoard"][row_click][col_click] != SHIP:
                     data["playerBoard"][row_click][col_click] = SHIP #adding a ship to the player board
                     Sprite(circle_ship, (RADIUS+2*col_click*RADIUS, RADIUS+2*row_click*RADIUS))
                     data["shipCount"] += 1
-        else: #only runs if the user has selected three ships
-            col_choose = (event.x-500)//80 
+        else: #only runs if the user has selected enough ships
+            col_choose = (event.x-SIZE*100)//80 
             row_choose = event.y//80
             if col_choose >= 0: #making sure the user clicks in the game board
                 if data["computerBoard"][row_choose][col_choose] == EMPTY:
@@ -78,7 +79,7 @@ def mouseClick(event):
                     computer = False #if computer = False then the computer doesn't shoot, it waits until True
                 elif data["computerBoard"][row_choose][col_choose] == HIT:
                     computer = False
-                if data["computerHits"] == 3: #de-bug where I would sink last ship, computer would guess, fixed
+                if data["computerHits"] == SHIP: #de-bug where I would sink last ship, computer would guess, fixed
                     data["continue"] = False
                 reDrawAll() #updates the board
                 if computer == True and data["continue"] == True:
@@ -89,7 +90,7 @@ def pickComputerShips():
     choose = False #variable to see if the computer has chosen all its ships
     if choose == False:
         i = 0
-        while i < 3:
+        while i < SHIP:
             row = randint(0,4)
             column = randint(0,4)
             if data["computerBoard"][row][column] != SHIP:
