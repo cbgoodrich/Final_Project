@@ -1,6 +1,6 @@
 #Charlie Goodrich
 #12/14/17
-#battleship.py - creates the game of battleship (please don't fail me)
+#battleship.py - creates the game of battleship (please don't fail me Mr. Smeds)
 
 from ggame import *
 from random import randint
