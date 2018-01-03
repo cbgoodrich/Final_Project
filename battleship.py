@@ -12,6 +12,11 @@ HIT = 2
 SIZE = 5
 SHIP = int(input("Enter the number of ships you want: "))
 RADIUS = 40
+print("INSTRUCTIONS:")
+print("Click on the player board to select ships. Gray means ship")
+print("After you've picked your ships, click on the computer board to guess")
+print("Blue means miss and red means hit")
+
 
 #BUILDS THE DESIRED MATRIX BOARD AND RETURNS IT TO THE MAIN FUNCTION
 def buildBoard():
