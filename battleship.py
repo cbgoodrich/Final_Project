@@ -90,54 +90,60 @@ def pickComputerShips():
     choose = False #variable to see if the computer has chosen all its ships
     if choose == False:
         i = 0
-        while i < SHIP:
+        while i < SHIP: #going through the process of the computer creating ships
             row = randint(0,4)
             column = randint(0,4)
             if data["computerBoard"][row][column] != SHIP:
                 data["computerBoard"][row][column] = SHIP
                 i += 1
         choose = True
-        
+
+#HAS THE COMPUTER RANDOMLY GUESS TO FIND THE USER'S SHIPS
 def computerTurn():
-    pick = False
+    pick = False #variable that checks to see if the computer has picked
     if pick == False:
-        i = 0
-        while i == 0:
+        while True: #loop that only breaks if guess is hit or miss
             row_guess = randint(0,4)
             col_guess = randint(0,4)
-            if data["playerBoard"][row_guess][col_guess] == SHIP:
+            if data["playerBoard"][row_guess][col_guess] == SHIP: #checking to see if player board is a ship
                 data["playerBoard"][row_guess][col_guess] = HIT
-                i = 1
                 data["computerHits"] += 1
+                break
             elif data["playerBoard"][row_guess][col_guess] == EMPTY:
                 data["playerBoard"][row_guess][col_guess] = MISS
-                i = 1
+                break
         pick = True
     reDrawAll()
-    playerTurn = True
-    
+    playerTurn = True #tells the program that the computer is done picking, now the user's turn
+
+#MAIN FUNCTION    
 if __name__ == "__main__":
     
+    #DICTIONARIES
     data = {}
-    data["continue"] = True
-    data["shipCount"] = 0
-    data["computerHits"] = 0
-    data["playerHits"] = 0
+    data["continue"] = True #makes the function run
+    data["shipCount"] = 0 #counts number of ships
+    data["computerHits"] = 0 #counts number of times the computer hits a ship
+    data["playerHits"] = 0 #counts number of times the player hits a ship
     
+    #COLORS
     gray = Color(0xD3D3D3, 1)
     white = Color(0xFFFFFF, 1)
     blue = Color(0x0000FF, 1)
     red = Color(0xFF0000, 1)
     black = Color(0x000000, 1)
     
+    #STUFF TO BE SPRITED
     circle_empty = CircleAsset(RADIUS, LineStyle(1,black), white)
     circle_miss = CircleAsset(RADIUS, LineStyle(1,black), blue)
     circle_hit = CircleAsset(RADIUS, LineStyle(1,black), red)
     circle_ship = CircleAsset(RADIUS, LineStyle(1,black), gray)
     
+    #KEEPING TRACK OF THE GAME BOARDS
     data["playerBoard"] = buildBoard()
     data["computerBoard"] = buildBoard()
     
+    #STARTS THE PROGRAM
     pickComputerShips()
     reDrawAll()
 
