@@ -47,7 +47,9 @@ def reDrawAll():
             elif data["computerBoard"][row][column] == EMPTY:
                 Sprite(circle_empty, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
     
-    #sprites the text underneath each game board
+    #sprites the text underneath each game board and score
+    Sprite(TextAsset(data["playerHits"], fill = black, style = "Bold 24pt Times"), (160,RADIUS*11))
+    Sprite(TextAsset(data["computerHits"], fill = black, style = "Bold 24pt Times"), (600,RADIUS*11))
     Sprite(TextAsset("USER", fill = black, style = "Bold 24pt Times"),(160,RADIUS*10))
     Sprite(TextAsset("COMPUTER", fill = black, style = "Bold 24pt Times"),(600,RADIUS*10))
     
