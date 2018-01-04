@@ -5,7 +5,7 @@
 from ggame import *
 from random import randint
 
-#CONSTANTS/HELPFUL VARIABLES
+#CONSTANTS/HELPFUL STUFF
 EMPTY = 0
 MISS = 1
 HIT = 2
@@ -36,7 +36,7 @@ def reDrawAll():
                 Sprite(circle_hit, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
             elif data["playerBoard"][row][column] == SHIP:
                 Sprite(circle_ship, (RADIUS+2*column*RADIUS, RADIUS+2*row*RADIUS))
-    for row in range(0,SIZE):
+    for row in range(0,SIZE): #same thing with the double loop here
         for column in range(0,SIZE):
             if data["computerBoard"][row][column] == MISS:
                 Sprite(circle_miss, (RADIUS+2*column*RADIUS+SIZE*100, RADIUS+2*row*RADIUS))
